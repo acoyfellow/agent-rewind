@@ -1,0 +1,14 @@
+{
+  "name": "agent-rewind",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@acoyfellow/amber": "github:acoyfellow/amber",
+    "effect": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}
