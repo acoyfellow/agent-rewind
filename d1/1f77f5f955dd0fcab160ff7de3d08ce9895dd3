@@ -1,0 +1,27 @@
+LICENSE
+  s_a90e6f4617f964::t_5d872d2e7350e1 1-9
+README.md
+  s_a90e6f4617f964::t_13747d6d041c1c 1-44
+package.json
+  s_a90e6f4617f964::t_b387e99e1d300d 13-17
+scripts/gate.mjs
+  s_a90e6f4617f964::t_40e4be709d0c10 1-75
+test/agent.test.ts
+  s_a90e6f4617f964::t_e5c39bac781834 1-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "d11f77f5f955dd0fcab160ff7de3d08ce9895dd3",
+  "prompts": {},
+  "sessions": {
+    "s_a90e6f4617f964": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a16017-51a0-7338-8762-5c58263ca8af",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Jordan Coeyman <jcoeyman@cloudflare.com>"
+    }
+  }
+}
