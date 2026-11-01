@@ -1,0 +1,1172 @@
+{
+  "kind": "agent-rewind",
+  "at": "2026-11-01T14:39:27.110Z",
+  "commit": "c95f08a10da4ab4789118a024a8541d64e23e7ce",
+  "model": "@cf/google/gemma-4-26b-a4b-it",
+  "temperature": 0.7,
+  "budget": 5,
+  "tasks": [
+    {
+      "id": "rename-field",
+      "goal": "The User type renamed `name` to `displayName`. Make the project type-check without changing src/types.ts.",
+      "nudge": "The only file to change is src/greet.ts and src/report.ts; every `.name` on a User must become `.displayName`."
+    },
+    {
+      "id": "optional-email",
+      "goal": "Make the project type-check. email is optional on purpose; do not make it required.",
+      "nudge": "exactOptionalPropertyTypes is on: you cannot assign `undefined` to `email`. Leave the key out instead, and guard reads of `user.email` with a check."
+    },
+    {
+      "id": "index-access",
+      "goal": "Make the project type-check without turning off any compiler option.",
+      "nudge": "noUncheckedIndexedAccess is on, so `items[0]` and `parts[1]` can be undefined. Handle the undefined case with a default or an early return."
+    },
+    {
+      "id": "union-exhaustive",
+      "goal": "A new shape `triangle` was added. Make the project type-check and handle triangle correctly (area = base * height / 2).",
+      "nudge": "Add a `case \"triangle\"` to both switches in src/area.ts and src/label.ts; the triangle fields are `base` and `height`."
+    },
+    {
+      "id": "async-return",
+      "goal": "loadUser became async. Make the project type-check; callers must await it.",
+      "nudge": "src/load.ts now returns Promise<User>. In src/profile.ts and src/admin.ts, make the callers async and await loadUser, and update their return types to Promise<...>."
+    },
+    {
+      "id": "generic-result",
+      "goal": "Make the project type-check. Keep the Result type generic.",
+      "nudge": "In src/parse.ts, return `{ ok: true, value }` and `{ ok: false, error }` objects that match Result<number>. In src/use.ts, check `result.ok` before reading `result.value`."
+    },
+    {
+      "id": "readonly-mutation",
+      "goal": "Make the project type-check. Keep the input arrays readonly; return new arrays instead of changing them.",
+      "nudge": "Do not call push or sort on the readonly input. Use `[...items, item]` and `[...items].sort(...)`, and change the return types to Array<...>."
+    },
+    {
+      "id": "config-shape",
+      "goal": "The config gained a required `retries` field and `timeout` became `timeoutMs`. Make the project type-check.",
+      "nudge": "Update both config objects in src/dev.ts and src/prod.ts: rename timeout to timeoutMs and add retries (use 0 for dev and 3 for prod). In src/client.ts read config.timeoutMs."
+    }
+  ],
+  "firstRuns": {
+    "total": 26,
+    "succeeded": 3,
+    "harnessErrors": 0,
+    "rows": [
+      {
+        "task": "rename-field",
+        "success": false,
+        "error": null
+      },
+      {
+        "task": "optional-email",
+        "success": false,
+        "error": null
+      },
+      {
+        "task": "union-exhaustive",
+        "success": false,
+        "error": null
+      },
+      {
+        "task": "index-access",
+        "success": false,
+        "error": null
+      },
+      {
+        "task": "async-return",
+        "success": false,
+        "error": null
+      },
+      {
+        "task": "config-shape",
+        "success": false,
+        "error": null
+      },
+      {
+        "task": "rename-field",
+        "success": false,
+        "error": null
+      },
+      {
+        "task": "readonly-mutation",
+        "success": true,
+        "error": null
+      },
+      {
+        "task": "index-access",
+        "success": false,
+        "error": null
+      },
+      {
+        "task": "optional-email",
+        "success": false,
+        "error": null
+      },
+      {
+        "task": "generic-result",
+        "success": false,
+        "error": null
+      },
+      {
+        "task": "union-exhaustive",
+        "success": false,
+        "error": null
+      },
+      {
+        "task": "async-return",
+        "success": false,
+        "error": null
+      },
+      {
+        "task": "generic-result",
+        "success": false,
+        "error": null
+      },
+      {
+        "task": "readonly-mutation",
+        "success": true,
+        "error": null
+      },
+      {
+        "task": "config-shape",
+        "success": false,
+        "error": null
+      },
+      {
+        "task": "rename-field",
+        "success": false,
+        "error": null
+      },
+      {
+        "task": "optional-email",
+        "success": false,
+        "error": null
+      },
+      {
+        "task": "index-access",
+        "success": false,
+        "error": null
+      },
+      {
+        "task": "union-exhaustive",
+        "success": false,
+        "error": null
+      },
+      {
+        "task": "async-return",
+        "success": false,
+        "error": null
+      },
+      {
+        "task": "config-shape",
+        "success": false,
+        "error": null
+      },
+      {
+        "task": "readonly-mutation",
+        "success": true,
+        "error": null
+      },
+      {
+        "task": "rename-field",
+        "success": false,
+        "error": null
+      },
+      {
+        "task": "optional-email",
+        "success": false,
+        "error": null
+      },
+      {
+        "task": "generic-result",
+        "success": false,
+        "error": null
+      }
+    ]
+  },
+  "failures": 20,
+  "rewound": {
+    "fixed": 15,
+    "tokens": 68559,
+    "medianTokens": 3484,
+    "wallMs": 200270,
+    "medianWallMs": 9588,
+    "turns": 157,
+    "tscCalls": 41,
+    "cheated": 0
+  },
+  "restarted": {
+    "fixed": 4,
+    "tokens": 42405,
+    "medianTokens": 2115,
+    "wallMs": 196630,
+    "medianWallMs": 9472,
+    "turns": 100,
+    "tscCalls": 39,
+    "cheated": 0
+  },
+  "medianSnapshotBytes": 8389,
+  "cases": [
+    {
+      "task": "rename-field",
+      "first": {
+        "success": false,
+        "finalErrors": 2,
+        "finished": false,
+        "turns": 5,
+        "tokens": 1678,
+        "modelMs": 5010,
+        "wallMs": 8237,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null,
+        "snapshotBytes": [
+          7702,
+          8083,
+          8207,
+          8332,
+          8706
+        ]
+      },
+      "rewindTurn": 4,
+      "rewindErrors": 3,
+      "rewound": {
+        "success": true,
+        "finalErrors": 0,
+        "finished": true,
+        "turns": 8,
+        "tokens": 2772,
+        "modelMs": 4145,
+        "wallMs": 7239,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      },
+      "restarted": {
+        "success": true,
+        "finalErrors": 0,
+        "finished": false,
+        "turns": 5,
+        "tokens": 2116,
+        "modelMs": 6865,
+        "wallMs": 9596,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      }
+    },
+    {
+      "task": "union-exhaustive",
+      "first": {
+        "success": false,
+        "finalErrors": 1,
+        "finished": false,
+        "turns": 5,
+        "tokens": 2518,
+        "modelMs": 8606,
+        "wallMs": 12244,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null,
+        "snapshotBytes": [
+          8496,
+          9319,
+          9511,
+          9696,
+          9885
+        ]
+      },
+      "rewindTurn": 4,
+      "rewindErrors": 2,
+      "rewound": {
+        "success": true,
+        "finalErrors": 0,
+        "finished": true,
+        "turns": 8,
+        "tokens": 4201,
+        "modelMs": 9601,
+        "wallMs": 13118,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      },
+      "restarted": {
+        "success": false,
+        "finalErrors": 1,
+        "finished": false,
+        "turns": 5,
+        "tokens": 2060,
+        "modelMs": 6170,
+        "wallMs": 8802,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      }
+    },
+    {
+      "task": "optional-email",
+      "first": {
+        "success": false,
+        "finalErrors": 2,
+        "finished": false,
+        "turns": 5,
+        "tokens": 1751,
+        "modelMs": 5775,
+        "wallMs": 9188,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null,
+        "snapshotBytes": [
+          7414,
+          7868,
+          7991,
+          8114,
+          8894
+        ]
+      },
+      "rewindTurn": 4,
+      "rewindErrors": 3,
+      "rewound": {
+        "success": true,
+        "finalErrors": 0,
+        "finished": false,
+        "turns": 9,
+        "tokens": 4155,
+        "modelMs": 8242,
+        "wallMs": 12320,
+        "tscCalls": 3,
+        "cheats": [],
+        "failed": null
+      },
+      "restarted": {
+        "success": false,
+        "finalErrors": 3,
+        "finished": false,
+        "turns": 5,
+        "tokens": 2583,
+        "modelMs": 18078,
+        "wallMs": 20376,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      }
+    },
+    {
+      "task": "index-access",
+      "first": {
+        "success": false,
+        "finalErrors": 1,
+        "finished": false,
+        "turns": 5,
+        "tokens": 2570,
+        "modelMs": 14656,
+        "wallMs": 18350,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null,
+        "snapshotBytes": [
+          7270,
+          8248,
+          8500,
+          8992,
+          9156
+        ]
+      },
+      "rewindTurn": 4,
+      "rewindErrors": 3,
+      "rewound": {
+        "success": true,
+        "finalErrors": 0,
+        "finished": true,
+        "turns": 9,
+        "tokens": 4594,
+        "modelMs": 7877,
+        "wallMs": 11365,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      },
+      "restarted": {
+        "success": false,
+        "finalErrors": 1,
+        "finished": false,
+        "turns": 5,
+        "tokens": 2176,
+        "modelMs": 9164,
+        "wallMs": 11825,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      }
+    },
+    {
+      "task": "async-return",
+      "first": {
+        "success": false,
+        "finalErrors": 2,
+        "finished": false,
+        "turns": 5,
+        "tokens": 1799,
+        "modelMs": 5484,
+        "wallMs": 7013,
+        "tscCalls": 1,
+        "cheats": [],
+        "failed": null,
+        "snapshotBytes": [
+          7644,
+          8197,
+          8332,
+          8470,
+          8693
+        ]
+      },
+      "rewindTurn": 0,
+      "rewindErrors": null,
+      "rewound": {
+        "success": false,
+        "finalErrors": 2,
+        "finished": false,
+        "turns": 5,
+        "tokens": 1896,
+        "modelMs": 4556,
+        "wallMs": 6899,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      },
+      "restarted": {
+        "success": true,
+        "finalErrors": 0,
+        "finished": false,
+        "turns": 5,
+        "tokens": 1980,
+        "modelMs": 6215,
+        "wallMs": 9472,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      }
+    },
+    {
+      "task": "config-shape",
+      "first": {
+        "success": false,
+        "finalErrors": 3,
+        "finished": false,
+        "turns": 5,
+        "tokens": 1570,
+        "modelMs": 3913,
+        "wallMs": 6850,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null,
+        "snapshotBytes": [
+          7712,
+          8094,
+          8216,
+          8339,
+          8466
+        ]
+      },
+      "rewindTurn": 0,
+      "rewindErrors": null,
+      "rewound": {
+        "success": false,
+        "finalErrors": 2,
+        "finished": false,
+        "turns": 5,
+        "tokens": 2348,
+        "modelMs": 5813,
+        "wallMs": 9331,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      },
+      "restarted": {
+        "success": false,
+        "finalErrors": 2,
+        "finished": false,
+        "turns": 5,
+        "tokens": 2283,
+        "modelMs": 5130,
+        "wallMs": 8080,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      }
+    },
+    {
+      "task": "rename-field",
+      "first": {
+        "success": false,
+        "finalErrors": 2,
+        "finished": false,
+        "turns": 5,
+        "tokens": 1678,
+        "modelMs": 4661,
+        "wallMs": 7488,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null,
+        "snapshotBytes": [
+          7702,
+          8083,
+          8207,
+          8332,
+          8718
+        ]
+      },
+      "rewindTurn": 4,
+      "rewindErrors": 3,
+      "rewound": {
+        "success": true,
+        "finalErrors": 0,
+        "finished": true,
+        "turns": 8,
+        "tokens": 2783,
+        "modelMs": 6386,
+        "wallMs": 9588,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      },
+      "restarted": {
+        "success": true,
+        "finalErrors": 0,
+        "finished": false,
+        "turns": 5,
+        "tokens": 2116,
+        "modelMs": 7025,
+        "wallMs": 10402,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      }
+    },
+    {
+      "task": "index-access",
+      "first": {
+        "success": false,
+        "finalErrors": 1,
+        "finished": false,
+        "turns": 5,
+        "tokens": 1842,
+        "modelMs": 7409,
+        "wallMs": 10100,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null,
+        "snapshotBytes": [
+          7270,
+          7924,
+          8109,
+          8438,
+          8567
+        ]
+      },
+      "rewindTurn": 4,
+      "rewindErrors": 3,
+      "rewound": {
+        "success": true,
+        "finalErrors": 0,
+        "finished": true,
+        "turns": 9,
+        "tokens": 3401,
+        "modelMs": 7386,
+        "wallMs": 11527,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      },
+      "restarted": {
+        "success": false,
+        "finalErrors": 1,
+        "finished": false,
+        "turns": 5,
+        "tokens": 2173,
+        "modelMs": 8776,
+        "wallMs": 11949,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      }
+    },
+    {
+      "task": "optional-email",
+      "first": {
+        "success": false,
+        "finalErrors": 1,
+        "finished": false,
+        "turns": 5,
+        "tokens": 2453,
+        "modelMs": 7042,
+        "wallMs": 11072,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null,
+        "snapshotBytes": [
+          7414,
+          8516,
+          8715,
+          8909,
+          9398
+        ]
+      },
+      "rewindTurn": 4,
+      "rewindErrors": 3,
+      "rewound": {
+        "success": true,
+        "finalErrors": 0,
+        "finished": false,
+        "turns": 9,
+        "tokens": 4835,
+        "modelMs": 8222,
+        "wallMs": 12875,
+        "tscCalls": 3,
+        "cheats": [],
+        "failed": null
+      },
+      "restarted": {
+        "success": false,
+        "finalErrors": 3,
+        "finished": false,
+        "turns": 5,
+        "tokens": 2036,
+        "modelMs": 5319,
+        "wallMs": 8324,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      }
+    },
+    {
+      "task": "generic-result",
+      "first": {
+        "success": false,
+        "finalErrors": 1,
+        "finished": false,
+        "turns": 5,
+        "tokens": 1857,
+        "modelMs": 32604,
+        "wallMs": 37018,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null,
+        "snapshotBytes": [
+          7514,
+          7980,
+          8104,
+          8238,
+          8839
+        ]
+      },
+      "rewindTurn": 4,
+      "rewindErrors": 3,
+      "rewound": {
+        "success": true,
+        "finalErrors": 0,
+        "finished": true,
+        "turns": 8,
+        "tokens": 3232,
+        "modelMs": 6580,
+        "wallMs": 8968,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      },
+      "restarted": {
+        "success": false,
+        "finalErrors": 1,
+        "finished": false,
+        "turns": 5,
+        "tokens": 1810,
+        "modelMs": 4952,
+        "wallMs": 5798,
+        "tscCalls": 1,
+        "cheats": [],
+        "failed": null
+      }
+    },
+    {
+      "task": "union-exhaustive",
+      "first": {
+        "success": false,
+        "finalErrors": 1,
+        "finished": false,
+        "turns": 5,
+        "tokens": 2652,
+        "modelMs": 10029,
+        "wallMs": 12987,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null,
+        "snapshotBytes": [
+          8496,
+          8973,
+          9236,
+          9533,
+          10136
+        ]
+      },
+      "rewindTurn": 4,
+      "rewindErrors": 2,
+      "rewound": {
+        "success": true,
+        "finalErrors": 0,
+        "finished": true,
+        "turns": 8,
+        "tokens": 4279,
+        "modelMs": 8591,
+        "wallMs": 11394,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      },
+      "restarted": {
+        "success": false,
+        "finalErrors": 1,
+        "finished": false,
+        "turns": 5,
+        "tokens": 2541,
+        "modelMs": 7553,
+        "wallMs": 11631,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      }
+    },
+    {
+      "task": "async-return",
+      "first": {
+        "success": false,
+        "finalErrors": 2,
+        "finished": false,
+        "turns": 5,
+        "tokens": 1645,
+        "modelMs": 4266,
+        "wallMs": 7074,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null,
+        "snapshotBytes": [
+          7644,
+          8140,
+          8263,
+          8389,
+          8515
+        ]
+      },
+      "rewindTurn": 0,
+      "rewindErrors": null,
+      "rewound": {
+        "success": false,
+        "finalErrors": 2,
+        "finished": false,
+        "turns": 5,
+        "tokens": 1939,
+        "modelMs": 4909,
+        "wallMs": 7892,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      },
+      "restarted": {
+        "success": false,
+        "finalErrors": 1,
+        "finished": false,
+        "turns": 5,
+        "tokens": 1960,
+        "modelMs": 5614,
+        "wallMs": 8475,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      }
+    },
+    {
+      "task": "generic-result",
+      "first": {
+        "success": false,
+        "finalErrors": 1,
+        "finished": false,
+        "turns": 5,
+        "tokens": 1860,
+        "modelMs": 6499,
+        "wallMs": 9936,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null,
+        "snapshotBytes": [
+          7514,
+          7980,
+          8104,
+          8226,
+          8827
+        ]
+      },
+      "rewindTurn": 4,
+      "rewindErrors": 3,
+      "rewound": {
+        "success": true,
+        "finalErrors": 0,
+        "finished": true,
+        "turns": 9,
+        "tokens": 3988,
+        "modelMs": 7400,
+        "wallMs": 11205,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      },
+      "restarted": {
+        "success": false,
+        "finalErrors": 1,
+        "finished": false,
+        "turns": 5,
+        "tokens": 2034,
+        "modelMs": 4428,
+        "wallMs": 7003,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      }
+    },
+    {
+      "task": "config-shape",
+      "first": {
+        "success": false,
+        "finalErrors": 2,
+        "finished": false,
+        "turns": 5,
+        "tokens": 1942,
+        "modelMs": 5202,
+        "wallMs": 8720,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null,
+        "snapshotBytes": [
+          7712,
+          8566,
+          8722,
+          8832,
+          8991
+        ]
+      },
+      "rewindTurn": 4,
+      "rewindErrors": 3,
+      "rewound": {
+        "success": false,
+        "finalErrors": 1,
+        "finished": false,
+        "turns": 9,
+        "tokens": 3264,
+        "modelMs": 6710,
+        "wallMs": 8838,
+        "tscCalls": 1,
+        "cheats": [],
+        "failed": null
+      },
+      "restarted": {
+        "success": false,
+        "finalErrors": 2,
+        "finished": false,
+        "turns": 5,
+        "tokens": 2282,
+        "modelMs": 5721,
+        "wallMs": 8518,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      }
+    },
+    {
+      "task": "rename-field",
+      "first": {
+        "success": false,
+        "finalErrors": 2,
+        "finished": false,
+        "turns": 5,
+        "tokens": 1675,
+        "modelMs": 6248,
+        "wallMs": 9896,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null,
+        "snapshotBytes": [
+          7702,
+          8083,
+          8207,
+          8332,
+          8706
+        ]
+      },
+      "rewindTurn": 4,
+      "rewindErrors": 3,
+      "rewound": {
+        "success": true,
+        "finalErrors": 0,
+        "finished": true,
+        "turns": 8,
+        "tokens": 2770,
+        "modelMs": 5350,
+        "wallMs": 7900,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      },
+      "restarted": {
+        "success": true,
+        "finalErrors": 0,
+        "finished": false,
+        "turns": 5,
+        "tokens": 2115,
+        "modelMs": 7280,
+        "wallMs": 10598,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      }
+    },
+    {
+      "task": "optional-email",
+      "first": {
+        "success": false,
+        "finalErrors": 1,
+        "finished": false,
+        "turns": 5,
+        "tokens": 2459,
+        "modelMs": 6352,
+        "wallMs": 9585,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null,
+        "snapshotBytes": [
+          7414,
+          8525,
+          8729,
+          8923,
+          9412
+        ]
+      },
+      "rewindTurn": 4,
+      "rewindErrors": 3,
+      "rewound": {
+        "success": true,
+        "finalErrors": 0,
+        "finished": false,
+        "turns": 9,
+        "tokens": 5085,
+        "modelMs": 10291,
+        "wallMs": 16261,
+        "tscCalls": 3,
+        "cheats": [],
+        "failed": null
+      },
+      "restarted": {
+        "success": false,
+        "finalErrors": 3,
+        "finished": false,
+        "turns": 5,
+        "tokens": 2042,
+        "modelMs": 8325,
+        "wallMs": 11858,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      }
+    },
+    {
+      "task": "index-access",
+      "first": {
+        "success": false,
+        "finalErrors": 1,
+        "finished": false,
+        "turns": 5,
+        "tokens": 1898,
+        "modelMs": 6561,
+        "wallMs": 9732,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null,
+        "snapshotBytes": [
+          7270,
+          7924,
+          8142,
+          8483,
+          8612
+        ]
+      },
+      "rewindTurn": 4,
+      "rewindErrors": 3,
+      "rewound": {
+        "success": true,
+        "finalErrors": 0,
+        "finished": true,
+        "turns": 9,
+        "tokens": 3484,
+        "modelMs": 5300,
+        "wallMs": 8613,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      },
+      "restarted": {
+        "success": false,
+        "finalErrors": 1,
+        "finished": false,
+        "turns": 5,
+        "tokens": 2048,
+        "modelMs": 6078,
+        "wallMs": 9151,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      }
+    },
+    {
+      "task": "union-exhaustive",
+      "first": {
+        "success": false,
+        "finalErrors": 1,
+        "finished": false,
+        "turns": 5,
+        "tokens": 2228,
+        "modelMs": 5971,
+        "wallMs": 9245,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null,
+        "snapshotBytes": [
+          8496,
+          8877,
+          9000,
+          9499,
+          9638
+        ]
+      },
+      "rewindTurn": 4,
+      "rewindErrors": 2,
+      "rewound": {
+        "success": true,
+        "finalErrors": 0,
+        "finished": true,
+        "turns": 8,
+        "tokens": 3779,
+        "modelMs": 8091,
+        "wallMs": 10463,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      },
+      "restarted": {
+        "success": false,
+        "finalErrors": 2,
+        "finished": false,
+        "turns": 5,
+        "tokens": 1964,
+        "modelMs": 3715,
+        "wallMs": 6342,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      }
+    },
+    {
+      "task": "async-return",
+      "first": {
+        "success": false,
+        "finalErrors": 2,
+        "finished": false,
+        "turns": 5,
+        "tokens": 1594,
+        "modelMs": 4532,
+        "wallMs": 6840,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null,
+        "snapshotBytes": [
+          7644,
+          8103,
+          8226,
+          8352,
+          8490
+        ]
+      },
+      "rewindTurn": 0,
+      "rewindErrors": null,
+      "rewound": {
+        "success": false,
+        "finalErrors": 1,
+        "finished": false,
+        "turns": 5,
+        "tokens": 1994,
+        "modelMs": 5088,
+        "wallMs": 6611,
+        "tscCalls": 1,
+        "cheats": [],
+        "failed": null
+      },
+      "restarted": {
+        "success": false,
+        "finalErrors": 2,
+        "finished": false,
+        "turns": 5,
+        "tokens": 1838,
+        "modelMs": 3791,
+        "wallMs": 6731,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      }
+    },
+    {
+      "task": "config-shape",
+      "first": {
+        "success": false,
+        "finalErrors": 2,
+        "finished": false,
+        "turns": 5,
+        "tokens": 1991,
+        "modelMs": 4613,
+        "wallMs": 7725,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null,
+        "snapshotBytes": [
+          7712,
+          8537,
+          8675,
+          8813,
+          9245
+        ]
+      },
+      "rewindTurn": 4,
+      "rewindErrors": 3,
+      "rewound": {
+        "success": true,
+        "finalErrors": 0,
+        "finished": false,
+        "turns": 9,
+        "tokens": 3760,
+        "modelMs": 5069,
+        "wallMs": 7863,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      },
+      "restarted": {
+        "success": false,
+        "finalErrors": 2,
+        "finished": false,
+        "turns": 5,
+        "tokens": 2248,
+        "modelMs": 8358,
+        "wallMs": 11699,
+        "tscCalls": 2,
+        "cheats": [],
+        "failed": null
+      }
+    }
+  ],
+  "sha256": "debb5c3ca9d97bf9b727573cbace65afbdffb54c2334ced5e24e1ed3bcc6007c"
+}
